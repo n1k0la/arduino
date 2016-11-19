@@ -1,0 +1,24 @@
+////////////////////////////////////////////////////////////////////////
+//      Adrien Dewulf   2016-46
+//      Folder: arduino
+//      Name:sondemultiple
+//---------------------------------------------------------------------
+/*
+Note:
+    _Code source sorti de Hackable magazine #15.
+
+
+////////////////////////////////////////////////////////////////////////
+*/
+
+#include <wire.h>
+#include <extEEPROM.h>
+
+extEEPROM eep(kbits_256,1,64); //"epp" allow you to access the componement EEPROM.
+
+//Initialisation de la getion eeprom.
+if (eep.begin(twiClock400khz))  {Serial.print(F("extEEPROM erreur"))}
+
+struct data{time_t moment; float temp; float hygro, float pression;}; // structure.
+
+data moment;
