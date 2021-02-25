@@ -1,2 +1,9 @@
-# arduino
-scripts about arduino
+////////////////////////////////////////////////////////////////////////
+//      Adrien Dewulf   2016-46
+//      Folder: arduino
+//      Name:sondemultiple
+//---------------------------------------------------------------------
+/*
+Note:
+    -code completement revu 20210225.
+    
