@@ -1,9 +1,1 @@
-////////////////////////////////////////////////////////////////////////
-//      Adrien Dewulf   2016-46
-//      Folder: arduino
-//      Name:sondemultiple
-//---------------------------------------------------------------------
-/*
-Note:
-    -code completement revu 20210225.
-    
+Version avec une connexion i2c pour l'ecran LCD. (limitant le problème de cablage et facilitant l'assemblage).
