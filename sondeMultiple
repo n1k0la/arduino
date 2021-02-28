@@ -1,4 +1,29 @@
 
+HardwareSerial SerialLora(D0, D1);
+
+void setup()
+{
+  Serial.begin(115200);
+  SerialLora.begin(115200);
+}
+
+// The loop function runs over and over again forever
+void loop()
+{
+  char c;
+
+  if (SerialLora.available() > 0)
+  {
+    c = SerialLora.read();
+    Serial.print(c);
+  }
+  if (Serial.available() > 0)
+  {
+    c = Serial.read();
+    SerialLora.print(c);
+  }
+}
+
 /////////////
 /* INCLUDES:*/
 #include <LiquidCrystal.h>
