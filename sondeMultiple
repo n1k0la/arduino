@@ -1,17 +1,3 @@
-
-
-
-void setup()
-{
-
-}
-
-// The loop function runs over and over again forever
-void loop()
-{
-  
-}
-
 /////////////
 /* INCLUDES:*/
 #include <LiquidCrystal.h>
@@ -20,6 +6,7 @@ void loop()
 // Wiring: SDA pin is connected to A4 and SCL pin to A5.
 // Connect to LCD via I2C, default address 0x27 (A0-A2 not jumpered)
 // LiquidCrystal_I2C.h: https://github.com/johnrickman/LiquidCrystal_I2C
+// 
 
 
 ///////////////
