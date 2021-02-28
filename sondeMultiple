@@ -137,6 +137,9 @@ void setup(){
 
   Serial.print("U= "); Serial.print(voltage);  Serial.print("V");
   delay(500);
+  
+  
+// The loop function runs over and over again forever
   char c;
   if (SerialLora.available() > 0)
   {
