@@ -1,27 +1,15 @@
 
-HardwareSerial SerialLora(D0, D1);
+
 
 void setup()
 {
-  Serial.begin(115200);
-  SerialLora.begin(115200);
+
 }
 
 // The loop function runs over and over again forever
 void loop()
 {
-  char c;
-
-  if (SerialLora.available() > 0)
-  {
-    c = SerialLora.read();
-    Serial.print(c);
-  }
-  if (Serial.available() > 0)
-  {
-    c = Serial.read();
-    SerialLora.print(c);
-  }
+  
 }
 
 /////////////
@@ -53,6 +41,8 @@ float R1 = 12352.0;
 float R2 = 17647.0;
 float voltage = 0;
 
+//Variables LoRA:
+HardwareSerial SerialLora(D0, D1);
 
 
 ///////////////////////////////
@@ -115,6 +105,12 @@ void setup(){
      //lcd.init();        //I2C 
      //lcd.backlight();   //I2C
      lcd.begin(16,2);
+
+     // Port série pour le LoRA:
+       Serial.begin(115200);
+       SerialLora.begin(115200);
+     
+     
      
 }
 
@@ -141,4 +137,16 @@ void setup(){
 
   Serial.print("U= "); Serial.print(voltage);  Serial.print("V");
   delay(500);
+  char c;
+  if (SerialLora.available() > 0)
+  {
+    c = SerialLora.read();
+    Serial.print(c);
+  }
+  if (Serial.available() > 0)
+  {
+    c = Serial.read();
+    SerialLora.print(c);
+  }
+  
 }
