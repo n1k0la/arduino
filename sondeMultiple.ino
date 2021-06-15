@@ -9,10 +9,10 @@
 
 ///////////////
 /* VARIABLES:*/
-LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2); // Change to (0x27,16,2) for 16x2 LCD.
+LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 20, 4); // Change to (0x27,16,2) for 16x2 LCD.
 
 
-// Variables pour le modules: 
+// Variables pour le modules:
 int trig = 8;// yellow wire
 int echo = 9;// green wire
 long lecture_echo;
@@ -29,18 +29,20 @@ float voltage = 0;
 
 ///////////////////////////////
 /* PROTOTYPES & DECLARATIONS: */
-// Affiche les informations matriels. 
+// Affiche les informations matriels.
 void infoHardware(){
-   lcd.begin(16,2); // (20,4) Ecran 20 caracteres, de 4 lignes)
+   lcd.begin(20,4); // (20,4) Ecran 20 caracteres, de 4 lignes)
    lcd.setCursor(0,0);
    lcd.print ("Water tank level"); // 16 caractères.
-   lcd.setCursor(0,1);
-   lcd.print ("Firmware v1.3"); // 14 caracteres.
-   delay (2500);
-   lcd.setCursor(0,0);
-   lcd.print ("Hware: proto"); // 16 caracteres
-   lcd.setCursor(0,1);
+   lcd.setCursor(11,3);
    lcd.print ("A DEWULF"); // 14
+   delay (2500);
+   lcd.clear();
+   lcd.setCursor(0,0);
+   lcd.print ("Hardware: POC "); // 16 caracteres
+   lcd.setCursor(0,1);
+   lcd.print ("Firmware v1.4"); // 14 caracteres.
+
   delay (2500);
   lcd.clear();
 }
@@ -66,19 +68,19 @@ void mesureVolt(){
 
 void setup(){
 
-   // Initialisation des broches pour le modules HC-SR04. 
+   // Initialisation des broches pour le modules HC-SR04.
      pinMode(echo, INPUT);
      pinMode(trig, OUTPUT);
      digitalWrite(trig, LOW);
-   
-   // Initialisation du port serie, futur base pour la fonction LoRa. 
+
+   // Initialisation du port serie, futur base pour la fonction LoRa.
      Serial.begin(9600);
      Serial.println ("Adrien Dewulf");
 
    // Initiate the LCD:
-     lcd.init();        //I2C 
+     lcd.init();        //I2C
      lcd.backlight();   //I2C
-     lcd.begin(16,2);   
+     lcd.begin(20,4);
 }
 
 
@@ -87,27 +89,39 @@ void setup(){
 
    void loop() {
      infoHardware();
-      
+
   do{
      // Effectue les mesures.
      mesureVolt();
      mesureVolume();
                                                                                                                                        //  printResultat();
      lcd.setCursor(0, 0);        // Set the cursor on the first column and first row.
-     lcd.print("Vol:");          // Print the string "Vol: pour indiquer le volume de la citerne.
-     lcd.setCursor(0, 7);
+     lcd.print("Volume : ");          // Print the string "Vol: pour indiquer le volume de la citerne.
+     lcd.setCursor(8, 0);
      lcd.print(m3);
-  
-     lcd.setCursor(0, 1);        //Set the cursor on the third column and the second row (counting starts at 0!).
-     lcd.print("U: ");
-     lcd.setCursor(4, 1); // 
+     lcd.setCursor(14,0);
+     lcd.print("m3.");
+
+     lcd.setCursor(0, 2);        //Set the cursor on the third column and the second row (counting starts at 0!).
+     lcd.print("Tension : ");
+     lcd.setCursor(9, 2); //
      lcd.print(voltage);
-     lcd.setCursor(9,1);
-     lcd.print("V"); 
-     Serial.print("U= "); Serial.print(voltage);  Serial.print("V");  
+     lcd.setCursor(14,2);
+     lcd.print("V.");
+
+     Serial.print("U= ");
+     Serial.print(voltage);
+     Serial.print("V");
+     Serial.print(", ");
+     Serial.print("volume: ");
+     Serial.print(m3);
+     Serial.print(" m3");
+     Serial.print(", ...");
+     Serial.print("\n");
+
      delay(500);
-  
+
      lcd.clear();
- 
+
   } while (1);
 }
